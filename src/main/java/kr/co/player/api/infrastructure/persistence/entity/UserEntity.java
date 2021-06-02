@@ -1,5 +1,6 @@
 package kr.co.player.api.infrastructure.persistence.entity;
 
+import kr.co.player.api.domain.shared.Address;
 import kr.co.player.api.domain.user.model.common.*;
 import kr.co.player.api.infrastructure.persistence.BaseEntity;
 import lombok.*;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
 @Entity
 @Table(name = "tbl_user")
@@ -25,7 +27,7 @@ public class UserEntity extends BaseEntity {
     private String name;
 
     @Embedded
-    private UserAddress userAddress;
+    private Address address;
 
     @Embedded
     @AttributeOverrides({
@@ -53,20 +55,4 @@ public class UserEntity extends BaseEntity {
 
     @Column(name = "refresh_token", length = 600)
     private String refreshToken;
-
-    @Builder
-    public UserEntity(String identity, String password, String name, UserAddress userAddress, UserPhone userPhone, int likeCnt, int rudeCnt, String imageUrl, UserRole role, Position position, String fcmToken, String refreshToken) {
-        this.identity = identity;
-        this.password = password;
-        this.name = name;
-        this.userAddress = userAddress;
-        this.userPhone = userPhone;
-        this.likeCnt = likeCnt;
-        this.rudeCnt = rudeCnt;
-        this.imageUrl = imageUrl;
-        this.role = role;
-        this.position = position;
-        this.fcmToken = fcmToken;
-        this.refreshToken = refreshToken;
-    }
 }

@@ -45,6 +45,11 @@ dependencies {
     //security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    //aws
+    compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.820'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.820'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
 }
 
 test {
