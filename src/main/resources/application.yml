@@ -1,2 +1,7 @@
 jwt:
   secret: ADBF#!@$DAOGEB@N!%^#$%$#*@K@!GDS<M
+
+aws:
+  key:
+    access:
+    secret:
