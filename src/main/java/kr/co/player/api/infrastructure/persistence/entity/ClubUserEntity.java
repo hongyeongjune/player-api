@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity
-@Table(name = "tbl_club_member")
+@Table(name = "tbl_club_user")
 @Where(clause = "deleted=0")
 @AttributeOverride(name = "id", column = @Column(name = "club_user_id"))
 @Getter

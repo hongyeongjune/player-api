@@ -17,9 +17,9 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity
-@Table(name = "tbl_match_invitation")
+@Table(name = "tbl_match_join")
 @Where(clause = "deleted=0")
-@AttributeOverride(name = "id", column = @Column(name = "match_invitation_id"))
+@AttributeOverride(name = "id", column = @Column(name = "match_join_id"))
 public class MatchJoinEntity extends BaseEntity {
 
     @Column(name = "message")
