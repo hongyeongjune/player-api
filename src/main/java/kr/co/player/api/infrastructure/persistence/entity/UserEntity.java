@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -93,7 +94,7 @@ public class UserEntity extends BaseEntity {
         this.refreshToken = refreshToken;
     }
 
-    public UserDto.READ toDomain() {
+    public UserDto.READ toDomain(List<String> imageUrlList) {
         return UserDto.READ.builder()
                 .identity(this.identity)
                 .name(this.name)
@@ -104,6 +105,7 @@ public class UserEntity extends BaseEntity {
                 .position(this.position)
                 .userPhone(this.userPhone)
                 .address(this.address)
+                .imageUrl(imageUrlList)
                 .build();
     }
 }
