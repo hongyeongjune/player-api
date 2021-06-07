@@ -76,9 +76,9 @@ public class UserEntity extends BaseEntity {
         this.name = update.getName();
         this.address = new Address(update.getCity(), update.getDistrict());
         this.position = new Position(
-                PositionType.findByString(update.getPositionType()),
-                PositionDetailsType.findByString(update.getMainPosition()),
-                PositionDetailsType.findByString(update.getSubPosition())
+                PositionType.of(update.getPositionType()),
+                PositionDetailsType.of(update.getMainPosition()),
+                PositionDetailsType.of(update.getSubPosition())
         );
         this.userPhone = new UserPhone(update.getUserPhone());
     }
