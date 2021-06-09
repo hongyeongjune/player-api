@@ -107,6 +107,12 @@ public class UserDto {
         @ApiModelProperty(example = "싫어요")
         private int rudeCnt;
 
+        @ApiModelProperty(example = "70kg")
+        private int height;
+
+        @ApiModelProperty(example = "186cm")
+        private int weight;
+
         private Address address;
         private Position position;
         private UserPhone userPhone;
@@ -139,8 +145,14 @@ public class UserDto {
         @ApiModelProperty(example = "ST")
         private String subPosition;
 
-        @ApiModelProperty("010-xxxx-xxxx")
+        @ApiModelProperty(example = "010-xxxx-xxxx")
         private String userPhone;
+
+        @ApiModelProperty(example = "70kg")
+        private int height;
+
+        @ApiModelProperty(example = "186cm")
+        private int weight;
     }
 
     @Getter
