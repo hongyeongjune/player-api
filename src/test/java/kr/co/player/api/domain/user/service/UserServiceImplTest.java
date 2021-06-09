@@ -283,16 +283,15 @@ class UserServiceImplTest {
     @Test
     void resetPassword() {
         //given
-        try (MockedStatic<UserThreadLocal> utl = Mockito.mockStatic(UserThreadLocal.class)) {
-            UserDto.RESET_PASSWORD reset = new EasyRandom().nextObject(UserDto.RESET_PASSWORD.class);
-            reset.setNewPassword("newPassword");
-            reset.setReNewPassword("newPassword");
-            UserEntity userEntity = new EasyRandom().nextObject(UserEntity.class);
-            utl.when(UserThreadLocal::get).thenReturn(userEntity);
+        UserEntity userEntity = new EasyRandom().nextObject(UserEntity.class);
+        given(userRepository.findByIdentity(anyString())).willReturn(Optional.ofNullable(userEntity));
+        UserDto.RESET_PASSWORD reset = new EasyRandom().nextObject(UserDto.RESET_PASSWORD.class);
+        reset.setNewPassword("newPassword");
+        reset.setReNewPassword("newPassword");
 
-            //then when
-            assertDoesNotThrow(() -> userService.resetPassword(reset));
-        }
+        //then when
+        assertDoesNotThrow(() -> userService.resetPassword(reset));
+
     }
 
     @Test
