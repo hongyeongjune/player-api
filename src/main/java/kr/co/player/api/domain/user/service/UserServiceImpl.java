@@ -102,6 +102,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserEntity getUserEntity(String identity) {
+        return userRepository.findByIdentity(identity).orElseThrow(() -> new NotFoundException("UserEntity"));
+    }
+
+    @Override
     public void updateUser(UserDto.UPDATE update) {
         UserEntity userEntity = UserThreadLocal.get();
         userEntity.update(update);
