@@ -43,6 +43,12 @@ public class UserEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @Column(name = "height")
+    private int height;
+
+    @Column(name = "weight")
+    private int weight;
+
     @Column(name = "likeCnt")
     private int likeCnt;
 
@@ -81,6 +87,8 @@ public class UserEntity extends BaseEntity {
                 PositionDetailsType.of(update.getSubPosition())
         );
         this.userPhone = new UserPhone(update.getUserPhone());
+        this.height = update.getHeight();
+        this.weight = update.getWeight();
     }
 
     public void updatePassword(String password) {
@@ -105,6 +113,8 @@ public class UserEntity extends BaseEntity {
                 .position(this.position)
                 .userPhone(this.userPhone)
                 .address(this.address)
+                .height(this.height)
+                .weight(this.weight)
                 .imageUrl(imageUrlList)
                 .build();
     }
