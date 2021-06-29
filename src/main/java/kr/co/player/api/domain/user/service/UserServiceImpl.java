@@ -84,6 +84,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDto.READ getUser() {
         UserEntity userEntity = UserThreadLocal.get();
 
