@@ -50,13 +50,6 @@ public class ClubUserServiceImpl implements ClubUserService {
             throw new BadRequestException("생성 가능한 클럽 또는 현재 가입한 클럽의 수가 초과하였습니다.");
         }
 
-//        boolean isPresentClub = clubUserEntityList.stream()
-//                .anyMatch(clubUserEntity -> clubUserEntity.getClubUserRole().equals(ClubUserRole.LEADER));
-//
-//        if(isPresentClub) {
-//            throw new BadRequestException("이미 생성한 클럽이 있습니다.");
-//        }
-
         clubUserRepository.save(
                 ClubUserEntity.builder()
                         .clubEntity(create.getClubEntity())
