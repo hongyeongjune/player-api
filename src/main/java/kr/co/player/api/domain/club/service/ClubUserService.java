@@ -1,7 +1,5 @@
 package kr.co.player.api.domain.club.service;
 
-import kr.co.player.api.domain.club.model.ClubDto;
-import kr.co.player.api.domain.club.model.ClubIntegratedDto;
 import kr.co.player.api.domain.club.model.ClubUserDto;
 import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;
 import kr.co.player.api.infrastructure.persistence.entity.ClubUserEntity;
@@ -11,7 +9,7 @@ import java.util.List;
 
 public interface ClubUserService {
 
-    //common - integrated, service
+    //common - integrated
     boolean isLeader(ClubEntity clubEntity);
 
     //create - integrated

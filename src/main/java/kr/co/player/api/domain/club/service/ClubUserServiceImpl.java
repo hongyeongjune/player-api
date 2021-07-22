@@ -94,7 +94,8 @@ public class ClubUserServiceImpl implements ClubUserService {
      */
     @Override
     public List<ClubUserDto.READ_MY_CLUB> getMyClubs() {
-        return clubUserRepository.fetchByUserEntity(UserThreadLocal.get()).stream()
+        UserEntity userEntity = UserThreadLocal.get();
+        return clubUserRepository.fetchByUserEntity(userEntity).stream()
                 .map(ClubUserEntity::toDomain)
                 .collect(Collectors.toList());
     }

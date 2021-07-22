@@ -23,6 +23,11 @@ public class ClubServiceImpl implements ClubService {
     private final static int LIMIT = 10;
 
     @Override
+    public boolean checkClubName(String clubName) {
+        return clubRepository.existsByClubName(clubName);
+    }
+
+    @Override
     public ClubEntity createClub(ClubDto.CREATE create) {
 
         if(clubRepository.existsByClubName(create.getName())) {
@@ -32,6 +37,7 @@ public class ClubServiceImpl implements ClubService {
         return clubRepository.save(ClubEntity.builder()
                 .clubName(create.getName())
                 .address(new Address(create.getCity(), create.getDistrict()))
+                .description(create.getDescription())
                 .rating(0)
                 .build());
     }
@@ -47,8 +53,8 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public Page<ClubEntity> getClubsByAddress(int pageNo, List<Address> addressList) {
-        return clubRepository.fetchClubsByAddress(PageUtil.applyPageConfig(pageNo, LIMIT), addressList);
+    public Page<ClubEntity> getClubsByAddress(int pageNo, List<String> districtList, List<String> cityList) {
+        return clubRepository.fetchClubsByAddress(PageUtil.applyPageConfig(pageNo, LIMIT), districtList, cityList);
     }
 
     @Override

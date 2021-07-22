@@ -9,13 +9,16 @@ import java.util.List;
 
 public interface ClubService {
 
+    //common - service
+    boolean checkClubName(String clubName);
+
     //create - integrated
     ClubEntity createClub(ClubDto.CREATE create);
 
     //read - integrated
     Page<ClubEntity> getClubs(int pageNo);
     ClubEntity getClub(String clubName);
-    Page<ClubEntity> getClubsByAddress(int pageNo, List<Address> addressList);
+    Page<ClubEntity> getClubsByAddress(int pageNo, List<String> districtList, List<String> cityList);
     Page<ClubEntity> getClubsByKeywordContains(int pageNo, String keyword);
 
     //update - integrated
