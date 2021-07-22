@@ -3,7 +3,6 @@ package kr.co.player.api.infrastructure.persistence.repository.impl;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import kr.co.player.api.domain.shared.Address;
 import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;
 import kr.co.player.api.infrastructure.persistence.entity.QClubEntity;
 import kr.co.player.api.infrastructure.persistence.repository.ClubRepositoryCustom;
@@ -30,9 +29,10 @@ public class ClubRepositoryCustomImpl extends QuerydslRepositorySupport implemen
     }
 
     @Override
-    public Page<ClubEntity> fetchClubsByAddress(Pageable pageable, List<Address> addressList) {
+    public Page<ClubEntity> fetchClubsByAddress(Pageable pageable, List<String> districtList, List<String> cityList) {
         JPAQuery<ClubEntity> query = jpaQuery.selectFrom(this.club)
-                .where(inAddress(addressList));
+                .where(inDistrict(districtList)
+                        .or(inCity(cityList)));
 
         return listToPage(pageable, query);
     }
@@ -45,8 +45,12 @@ public class ClubRepositoryCustomImpl extends QuerydslRepositorySupport implemen
         return listToPage(pageable, query);
     }
 
-    private BooleanExpression inAddress(List<Address> addressList) {
-        return this.club.address.in(addressList);
+    private BooleanExpression inDistrict(List<String> districtList) {
+        return this.club.address.district.in(districtList);
+    }
+
+    private BooleanExpression inCity(List<String> cityList) {
+        return this.club.address.city.in(cityList);
     }
 
     private Page<ClubEntity> listToPage(Pageable pageable, JPAQuery<ClubEntity> query) {

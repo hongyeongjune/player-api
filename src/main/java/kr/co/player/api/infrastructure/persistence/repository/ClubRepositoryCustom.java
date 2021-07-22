@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface ClubRepositoryCustom {
     Page<ClubEntity> fetchClubs(Pageable pageable);
-    Page<ClubEntity> fetchClubsByAddress(Pageable pageable, List<Address> addressList);
+    Page<ClubEntity> fetchClubsByAddress(Pageable pageable, List<String> districtList, List<String> cityList);
     Page<ClubEntity> fetchClubsByKeywordContains(Pageable pageable, String keyword);
 }
