@@ -15,6 +15,17 @@ public class ClubIntegratedDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    public static class LEADER {
+        @ApiModelProperty(example = "클럽 이름")
+        @NotBlank(message = "클럽 이름을 입력해주세요")
+        private String name;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
     public static class CREATE {
         @ApiModelProperty(example = "클럽 이름")
         @NotBlank(message = "클럽 이름을 입력해주세요")
