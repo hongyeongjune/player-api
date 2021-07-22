@@ -1,8 +1,7 @@
-package kr.co.player.api.domain.shared.test;
+package kr.co.player.api.infrastructure.utils.builder;
 
 import kr.co.player.api.domain.club.model.ClubUserDto;
 import kr.co.player.api.domain.club.model.common.ClubUserRole;
-import kr.co.player.api.domain.user.model.UserDto;
 import kr.co.player.api.domain.user.model.common.PositionType;
 import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;
 import kr.co.player.api.infrastructure.persistence.entity.ClubUserEntity;
@@ -18,6 +17,16 @@ public class ClubUserBuilder {
                 .clubUserRole(new EasyRandom().nextObject(ClubUserRole.class))
                 .clubPositionType(new EasyRandom().nextObject(PositionType.class))
                 .uniformNumber(new EasyRandom().nextInt())
+                .build();
+    }
+
+    public static ClubUserEntity leader(ClubEntity clubEntity, UserEntity userEntity) {
+        return ClubUserEntity.builder()
+                .clubEntity(clubEntity)
+                .userEntity(userEntity)
+                .clubUserRole(ClubUserRole.LEADER)
+                .clubPositionType(PositionType.MF)
+                .uniformNumber(10)
                 .build();
     }
 

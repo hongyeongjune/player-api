@@ -1,4 +1,4 @@
-package kr.co.player.api.domain.shared.test;
+package kr.co.player.api.infrastructure.utils.builder;
 
 import kr.co.player.api.domain.user.model.UserDto;
 import kr.co.player.api.domain.user.model.common.Gender;
