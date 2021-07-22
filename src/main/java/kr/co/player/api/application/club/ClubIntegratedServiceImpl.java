@@ -26,6 +26,15 @@ public class ClubIntegratedServiceImpl implements ClubIntegratedService {
     private final ClubService clubService;
     private final ClubUserService clubUserService;
 
+    @Override
+    public boolean isLeader(String clubName) {
+        ClubEntity clubEntity = clubService.getClub(clubName);
+
+        boolean isLeader = clubUserService.isLeader(clubEntity);
+
+        return isLeader;
+    }
+
     /**
      * 클럽 생성 : ClubService + ClubUserService
      * @param create : 클럽 생성에 필요한 dto
@@ -63,8 +72,8 @@ public class ClubIntegratedServiceImpl implements ClubIntegratedService {
      * @return : 페이징 dto
      */
     @Override
-    public Page<ClubIntegratedDto.READ> getClubsByAddress(int pageNo, List<Address> addressList) {
-        Page<ClubEntity> clubEntityPage = clubService.getClubsByAddress(pageNo, addressList);
+    public Page<ClubIntegratedDto.READ> getClubsByAddress(int pageNo, List<String> districtList, List<String> cityList) {
+        Page<ClubEntity> clubEntityPage = clubService.getClubsByAddress(pageNo, districtList, cityList);
 
         return toDto(clubEntityPage);
     }
