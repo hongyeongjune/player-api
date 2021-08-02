@@ -1,12 +1,10 @@
 package kr.co.player.api.interfaces.controller;
 
 import kr.co.player.api.IntegrationTest;
-import kr.co.player.api.domain.shared.test.UserBuilder;
 import kr.co.player.api.domain.user.model.UserDto;
-import kr.co.player.api.domain.user.service.UserService;
 import kr.co.player.api.infrastructure.persistence.entity.UserEntity;
-import kr.co.player.api.infrastructure.persistence.repository.UserRepository;
 import kr.co.player.api.infrastructure.security.jwt.JwtProvider;
+import kr.co.player.api.infrastructure.utils.builder.UserBuilder;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -22,12 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UserControllerTest extends IntegrationTest {
 
     private final String URL = "/v1/api/users";
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private JwtProvider jwtProvider;
