@@ -1,10 +1,10 @@
 package kr.co.player.api.infrastructure.persistence.repository;
 
 import kr.co.player.api.RepositoryTest;
-import kr.co.player.api.domain.shared.test.ClubUserBuilder;
 import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;
 import kr.co.player.api.infrastructure.persistence.entity.ClubUserEntity;
 import kr.co.player.api.infrastructure.persistence.entity.UserEntity;
+import kr.co.player.api.infrastructure.utils.builder.ClubUserBuilder;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

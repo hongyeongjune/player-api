@@ -40,11 +40,11 @@ class ClubRepositoryCustomTest {
         //when
         Page<ClubEntity> clubEntityPage = clubRepository.fetchClubsByAddress(
                 PageUtil.applyPageConfig(1, 10),
-                Arrays.asList(new Address(clubEntity.getAddress().getCity(), clubEntity.getAddress().getDistrict())));
+                Arrays.asList(clubEntity.getAddress().getDistrict()), Arrays.asList(clubEntity.getAddress().getCity()));
 
         Page<ClubEntity> notSavedClubEntityPage = clubRepository.fetchClubsByAddress(
                 PageUtil.applyPageConfig(1, 10),
-                Arrays.asList(new Address("Not Exist city", "Not exist District")));
+                Arrays.asList("Not exist District"), Arrays.asList("Not Exist city"));
 
         //then
         assertEquals(notSavedClubEntityPage.getTotalPages(), 0);
