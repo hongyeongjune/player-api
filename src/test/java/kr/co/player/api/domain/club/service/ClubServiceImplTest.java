@@ -33,6 +33,16 @@ class ClubServiceImplTest {
     private ClubRepository clubRepository;
 
     @Test
+    void checkClubName() {
+        //given
+        given(clubRepository.existsByClubName(anyString())).willReturn(false);
+
+        boolean isSuccess = clubService.checkClubName(anyString());
+
+        assertTrue(!isSuccess);
+    }
+
+    @Test
     void createClub() {
         //given
         ClubDto.CREATE create = new EasyRandom().nextObject(ClubDto.CREATE.class);
@@ -96,12 +106,13 @@ class ClubServiceImplTest {
         //given
         List<ClubEntity> clubEntityList = Collections.singletonList(new EasyRandom().nextObject(ClubEntity.class));
         Page<ClubEntity> clubEntityPage = new PageImpl<>(clubEntityList);
-        given(clubRepository.fetchClubsByAddress(any(), any(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ))).willReturn(clubEntityPage);
+        given(clubRepository.fetchClubsByAddress(any(), any(), any())).willReturn(clubEntityPage);
 
-        List<Address> addressList = Collections.singletonList(new EasyRandom().nextObject(Address.class));
+        List<String> districtList = Collections.singletonList(new EasyRandom().nextObject(String.class));
+        List<String> cityList = Collections.singletonList(new EasyRandom().nextObject(String.class));
 
         //when
-        Page<ClubEntity> savedClubEntityPage = clubService.getClubsByAddress(1, addressList);
+        Page<ClubEntity> savedClubEntityPage = clubService.getClubsByAddress(1, districtList, cityList);
 
         //then
         assertNotNull(savedClubEntityPage);
