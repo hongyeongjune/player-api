@@ -172,6 +172,24 @@ public class ClubIntegratedDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    public static class UPDATE_CLUB_NAME {
+
+        @ApiModelProperty(example = "클럽 이름")
+        @NotBlank(message = "클럽 이름을 입력해주세요")
+        @Size(min = 2, max = 16, message = "클럽 이름은 2 ~ 16자로 입력해주세요.")
+        private String oldName;
+
+        @ApiModelProperty(example = "클럽 이름")
+        @NotBlank(message = "클럽 이름을 입력해주세요")
+        @Size(min = 2, max = 16, message = "클럽 이름은 2 ~ 16자로 입력해주세요.")
+        private String newName;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
     public static class UPDATE_SUBMIT {
         @ApiModelProperty(example = "신청한 사람 아이디")
         private String identity;
