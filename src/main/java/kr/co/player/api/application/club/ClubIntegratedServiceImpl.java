@@ -103,11 +103,29 @@ public class ClubIntegratedServiceImpl implements ClubIntegratedService {
         }
 
         clubService.updateClub(clubEntity, ClubDto.UPDATE.builder()
-                .name(update.getName())
                 .city(update.getCity())
                 .district(update.getDistrict())
                 .description(update.getDescription())
                 .build());
+    }
+
+    /**
+     * 클럽 장이 클럽 이름 수정 : ClubService + ClubUserService
+     * @param update : 클럽 이름 수정을 위한 dto
+     */
+    @Override
+    public void updateClubName(ClubIntegratedDto.UPDATE_CLUB_NAME update) {
+        ClubEntity clubEntity = clubService.getClub(update.getOldName());
+
+        if(!clubUserService.isLeader(clubEntity)) {
+            throw new BadRequestException("수정 권한이 없습니다.");
+        }
+
+        if(clubService.checkClubName(update.getNewName())) {
+            throw new BadRequestException("이미 존재하는 클럽 이름입니다.");
+        }
+
+        clubEntity.update(update.getNewName());
     }
 
     private Page<ClubIntegratedDto.READ> toDto(Page<ClubEntity> clubEntityPage) {

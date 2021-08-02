@@ -21,4 +21,5 @@ public interface ClubIntegratedService {
 
     //update
     void updateClub(ClubIntegratedDto.UPDATE update);
+    void updateClubName(ClubIntegratedDto.UPDATE_CLUB_NAME update);
 }
