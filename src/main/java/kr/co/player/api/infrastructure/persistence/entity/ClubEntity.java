@@ -44,8 +44,11 @@ public class ClubEntity extends BaseEntity {
     }
 
     public void update(ClubDto.UPDATE update) {
-        this.clubName = update.getName();
         this.address = new Address(update.getCity(), update.getDistrict());
         this.description = update.getDescription();
+    }
+
+    public void update(String clubName) {
+        this.clubName = clubName;
     }
 }
