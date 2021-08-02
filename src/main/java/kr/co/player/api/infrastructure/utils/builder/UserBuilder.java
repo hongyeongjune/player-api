@@ -20,6 +20,36 @@ public class UserBuilder {
                 .build();
     }
 
+    public static UserEntity KimDongWook = UserEntity.builder()
+                .identity("kimdongwook")
+                .password("password")
+                .name("김동욱")
+                .userPhone(new UserPhone("010-6888-4650"))
+                .birth("19950909")
+                .gender(Gender.MALE)
+                .role(UserRole.USER)
+                .build();
+
+    public static UserEntity LeeYeChan = UserEntity.builder()
+            .identity("leeyechan")
+            .password("password")
+            .name("이예찬")
+            .userPhone(new UserPhone("010-3632-8406"))
+            .birth("19950401")
+            .gender(Gender.MALE)
+            .role(UserRole.USER)
+            .build();
+
+    public static UserEntity LeeJaeSung = UserEntity.builder()
+            .identity("leejaesung")
+            .password("password")
+            .name("이재성")
+            .userPhone(new UserPhone("010-3892-0299"))
+            .birth("19950309")
+            .gender(Gender.MALE)
+            .role(UserRole.USER)
+            .build();
+
     public static UserDto.CREATE create = UserDto.CREATE.builder()
             .identity("hongyeongjune")
             .password("password")

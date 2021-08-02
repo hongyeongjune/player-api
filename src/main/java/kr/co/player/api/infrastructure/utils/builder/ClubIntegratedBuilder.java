@@ -20,4 +20,9 @@ public class ClubIntegratedBuilder {
             .district("구리시")
             .description("경기도 구리시 아름마을 축구팀")
             .build();
+
+    public static ClubIntegratedDto.UPDATE_CLUB_NAME updateClubName = ClubIntegratedDto.UPDATE_CLUB_NAME.builder()
+            .oldName("아름마을 FC")
+            .newName("Liverpool FC")
+            .build();
 }
