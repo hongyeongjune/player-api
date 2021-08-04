@@ -1,11 +1,10 @@
 package kr.co.player.api.infrastructure.persistence.entity;
 
+import kr.co.player.api.domain.club.model.ClubIntegratedDto;
+import kr.co.player.api.domain.invitation.model.ClubInvitationDto;
 import kr.co.player.api.domain.shared.JoinStatus;
 import kr.co.player.api.infrastructure.persistence.BaseEntity;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -16,6 +15,7 @@ import javax.persistence.*;
 @Where(clause = "deleted=0")
 @AttributeOverride(name = "id", column = @Column(name = "club_invitation_id"))
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ClubInvitationEntity extends BaseEntity {
 
@@ -33,4 +33,26 @@ public class ClubInvitationEntity extends BaseEntity {
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
+    public void updateStatus(JoinStatus joinStatus) {
+        this.joinStatus = joinStatus;
+    }
+
+    public ClubIntegratedDto.READ_INVITATION toIntegratedDomain() {
+        return ClubIntegratedDto.READ_INVITATION.builder()
+                .identity(this.userEntity.getIdentity())
+                .name(this.userEntity.getName())
+                .message(this.message)
+                .joinStatus(this.joinStatus)
+                .build();
+    }
+
+    public ClubInvitationDto.READ toDomain() {
+        return ClubInvitationDto.READ.builder()
+                .clubName(this.clubUserEntity.getClubEntity().getClubName())
+                .identity(this.clubUserEntity.getUserEntity().getIdentity())
+                .name(this.clubUserEntity.getUserEntity().getName())
+                .message(this.message)
+                .joinStatus(this.joinStatus)
+                .build();
+    }
 }
