@@ -6,6 +6,7 @@ import kr.co.player.api.infrastructure.persistence.entity.ClubUserEntity;
 import kr.co.player.api.infrastructure.persistence.entity.UserEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClubUserService {
 
@@ -19,7 +20,7 @@ public interface ClubUserService {
     //read - integrated
     ClubUserEntity getClubLeader(ClubEntity clubEntity);
     Long countClubUser(ClubEntity clubEntity);
-    ClubUserEntity getClubUserEntity(ClubEntity clubEntity, UserEntity userEntity);
+    Optional<ClubUserEntity> getClubUserEntity(ClubEntity clubEntity, UserEntity userEntity);
 
     //read - service
     List<ClubUserDto.READ_MY_CLUB> getMyClubs();

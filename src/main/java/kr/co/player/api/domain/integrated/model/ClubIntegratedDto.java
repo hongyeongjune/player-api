@@ -227,4 +227,17 @@ public class ClubIntegratedDto {
         private String clubName;
     }
 
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class UPDATE_INVITATION_DIRECTLY {
+        @ApiModelProperty(example = "클럽 이름")
+        private String clubName;
+
+        @ApiModelProperty(example = "초대한 회원 아이디")
+        private String identity;
+    }
+
 }

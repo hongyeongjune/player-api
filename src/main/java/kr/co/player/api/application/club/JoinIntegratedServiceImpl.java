@@ -13,6 +13,7 @@ import kr.co.player.api.domain.submit.model.ClubSubmitDto;
 import kr.co.player.api.domain.submit.service.ClubSubmitService;
 import kr.co.player.api.domain.user.service.UserService;
 import kr.co.player.api.infrastructure.error.exception.BadRequestException;
+import kr.co.player.api.infrastructure.error.exception.NotFoundException;
 import kr.co.player.api.infrastructure.interceptor.UserThreadLocal;
 import kr.co.player.api.infrastructure.persistence.entity.*;
 import lombok.RequiredArgsConstructor;
@@ -34,12 +35,16 @@ public class JoinIntegratedServiceImpl implements JoinIntegratedService {
     private final UserService userService;
 
     /**
-     * 클럽 가입 신청 : ClubService + ClubSubmitService
+     * 클럽 가입 신청 : ClubService + ClubUserService + ClubSubmitService
      * @param create : 클럽 가입을 위한 dto
      */
     @Override
     public void createClubSubmit(ClubIntegratedDto.CREATE_SUBMIT create) {
         ClubEntity clubEntity = clubService.getClub(create.getClubName());
+
+        if(clubUserService.getClubUserEntity(clubEntity, UserThreadLocal.get()).isPresent()) {
+            throw new BadRequestException("이미 해당 클럽에 가입하셨습니다.");
+        }
 
         if(clubSubmitService.getClubSubmitByWaiting(clubEntity).isPresent()) {
             throw new BadRequestException("이미 신청을 한 내역이 있습니다.");
@@ -65,7 +70,12 @@ public class JoinIntegratedServiceImpl implements JoinIntegratedService {
         UserEntity clubLeaderEntity = UserThreadLocal.get();
         UserEntity userEntity = userService.getUserEntity(create.getIdentity());
 
-        ClubUserEntity clubUserEntity = clubUserService.getClubUserEntity(clubEntity, clubLeaderEntity);
+        ClubUserEntity clubUserEntity = clubUserService.getClubUserEntity(clubEntity, clubLeaderEntity)
+                .orElseThrow(() -> new NotFoundException("ClubUserEntity"));
+
+        if(clubUserService.getClubUserEntity(clubEntity, userEntity).isPresent()) {
+            throw new BadRequestException("이미 클럽에 가입되어있습니다.");
+        }
 
         if(clubInvitationService.getClubInvitationByWaiting(clubUserEntity, userEntity).isPresent()) {
             throw new BadRequestException("이미 초대를 하신 내역이 있습니다.");
@@ -183,12 +193,33 @@ public class JoinIntegratedServiceImpl implements JoinIntegratedService {
                     .build());
         }
 
-        ClubUserEntity clubUserEntity = clubUserService.getClubUserEntity(clubEntity, clubLeaderEntity);
+        ClubUserEntity clubUserEntity = clubUserService.getClubUserEntity(clubEntity, clubLeaderEntity)
+                .orElseThrow(() -> new NotFoundException("ClubUserEntity"));
 
         clubInvitationService.updateJoinStatus(ClubInvitationDto.UPDATE.builder()
                 .clubUserEntity(clubUserEntity)
                 .userEntity(userEntity)
                 .joinStatus(joinStatus)
+                .build());
+    }
+
+    /**
+     * 클럽장이 직접 초대했던 회원들 취소 : ClubService + UserService + ClubUserService + ClubInvitationService
+     * @param update : 클럽 초대 상태 변경 dto
+     */
+    @Override
+    public void updateClubInvitationStatusDirectly(ClubIntegratedDto.UPDATE_INVITATION_DIRECTLY update) {
+        ClubEntity clubEntity = clubService.getClub(update.getClubName());
+        UserEntity clubLeaderEntity = UserThreadLocal.get();
+        UserEntity userEntity = userService.getUserEntity(update.getIdentity());
+
+        ClubUserEntity clubUserEntity = clubUserService.getClubUserEntity(clubEntity, clubLeaderEntity)
+                .orElseThrow(() -> new NotFoundException("ClubUserEntity"));
+
+        clubInvitationService.updateJoinStatus(ClubInvitationDto.UPDATE.builder()
+                .clubUserEntity(clubUserEntity)
+                .userEntity(userEntity)
+                .joinStatus(JoinStatus.CANCEL)
                 .build());
     }
 }

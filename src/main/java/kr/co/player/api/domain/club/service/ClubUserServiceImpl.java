@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,9 +84,8 @@ public class ClubUserServiceImpl implements ClubUserService {
     }
 
     @Override
-    public ClubUserEntity getClubUserEntity(ClubEntity clubEntity, UserEntity userEntity) {
-        return clubUserRepository.fetchByClubEntityAndUserEntity(clubEntity, userEntity)
-                .orElseThrow(() -> new NotFoundException("ClubUserEntity"));
+    public Optional<ClubUserEntity> getClubUserEntity(ClubEntity clubEntity, UserEntity userEntity) {
+        return clubUserRepository.fetchByClubEntityAndUserEntity(clubEntity, userEntity);
     }
 
     /**

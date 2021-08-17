@@ -17,4 +17,5 @@ public interface JoinIntegratedService {
     void updateClubSubmitStatus(ClubIntegratedDto.UPDATE_SUBMIT update);
     void updateClubSubmitStatusDirectly(String clubName);
     void updateClubInvitationStatus(ClubIntegratedDto.UPDATE_INVITATION update);
+    void updateClubInvitationStatusDirectly(ClubIntegratedDto.UPDATE_INVITATION_DIRECTLY update);
 }
