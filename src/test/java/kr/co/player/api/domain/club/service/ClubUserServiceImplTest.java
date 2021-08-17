@@ -124,7 +124,7 @@ class ClubUserServiceImplTest {
         given(clubUserRepository.fetchByClubEntityAndUserEntity(any(), any())).willReturn(Optional.ofNullable(clubUserEntity));
 
         //when
-        ClubUserEntity savedClubUserEntity = clubUserService.getClubUserEntity(clubEntity, userEntity);
+        ClubUserEntity savedClubUserEntity = clubUserService.getClubUserEntity(clubEntity, userEntity).orElse(null);
 
         //then
         assertEquals(clubUserEntity.getUserEntity().getIdentity(), savedClubUserEntity.getUserEntity().getIdentity());

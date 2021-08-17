@@ -51,6 +51,7 @@ class JoinIntegratedServiceImplTest {
         ClubEntity clubEntity = new EasyRandom().nextObject(ClubEntity.class);
         given(clubService.getClub(create.getClubName())).willReturn(clubEntity);
         given(clubSubmitService.getClubSubmitByWaiting(any())).willReturn(Optional.empty());
+        given(clubUserService.getClubUserEntity(any(), any())).willReturn(Optional.empty());
         given(clubSubmitService.countClubSubmitByUserEntityNotWaiting()).willReturn(1L);
         ReflectionTestUtils.setField(joinIntegratedService, "SUBMIT_LIMIT", 10);
 
@@ -74,7 +75,9 @@ class JoinIntegratedServiceImplTest {
             given(userService.getUserEntity(create.getIdentity())).willReturn(userEntity);
 
             ClubUserEntity clubUserEntity = ClubUserBuilder.leader(clubEntity, clubLeaderEntity);
-            given(clubUserService.getClubUserEntity(clubEntity, clubLeaderEntity)).willReturn(clubUserEntity);
+            given(clubUserService.getClubUserEntity(clubEntity, clubLeaderEntity)).willReturn(Optional.ofNullable(clubUserEntity));
+
+            given(clubUserService.getClubUserEntity(clubEntity, userEntity)).willReturn(Optional.empty());
 
             given(clubInvitationService.getClubInvitationByWaiting(clubUserEntity, userEntity)).willReturn(Optional.empty());
 
@@ -163,9 +166,33 @@ class JoinIntegratedServiceImplTest {
             utl.when(UserThreadLocal::get).thenReturn(userEntity);
 
             ClubUserEntity clubUserEntity = new EasyRandom().nextObject(ClubUserEntity.class);
-            given(clubUserService.getClubUserEntity(clubEntity, clubLeaderEntity)).willReturn(clubUserEntity);
+            given(clubUserService.getClubUserEntity(clubEntity, clubLeaderEntity)).willReturn(Optional.ofNullable(clubUserEntity));
 
+            //when then
             assertDoesNotThrow(() -> joinIntegratedService.updateClubInvitationStatus(update));
+        }
+    }
+
+    @Test
+    void updateClubInvitationStatusDirectly() {
+        //given
+        try (MockedStatic<UserThreadLocal> utl = Mockito.mockStatic(UserThreadLocal.class)) {
+            ClubIntegratedDto.UPDATE_INVITATION_DIRECTLY update = new EasyRandom().nextObject(ClubIntegratedDto.UPDATE_INVITATION_DIRECTLY.class);
+
+            ClubEntity clubEntity = new EasyRandom().nextObject(ClubEntity.class);
+            given(clubService.getClub(update.getClubName())).willReturn(clubEntity);
+
+            UserEntity clubLeaderEntity = UserBuilder.HongYeongJune;
+            utl.when(UserThreadLocal::get).thenReturn(clubLeaderEntity);
+
+            UserEntity userEntity = new EasyRandom().nextObject(UserEntity.class);
+            given(userService.getUserEntity(update.getIdentity())).willReturn(userEntity);
+
+            ClubUserEntity clubUserEntity = ClubUserBuilder.build(clubEntity, clubLeaderEntity);
+            given(clubUserService.getClubUserEntity(clubEntity, clubLeaderEntity)).willReturn(Optional.ofNullable(clubUserEntity));
+
+            //when then
+            assertDoesNotThrow(() -> joinIntegratedService.updateClubInvitationStatusDirectly(update));
         }
     }
 }
