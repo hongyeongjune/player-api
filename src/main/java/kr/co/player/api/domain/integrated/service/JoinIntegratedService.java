@@ -1,6 +1,6 @@
-package kr.co.player.api.domain.integrated;
+package kr.co.player.api.domain.integrated.service;
 
-import kr.co.player.api.domain.club.model.ClubIntegratedDto;
+import kr.co.player.api.domain.integrated.model.ClubIntegratedDto;
 import org.springframework.data.domain.Page;
 
 public interface JoinIntegratedService {

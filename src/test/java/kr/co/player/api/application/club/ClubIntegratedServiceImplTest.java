@@ -1,7 +1,7 @@
 package kr.co.player.api.application.club;
 
 import kr.co.player.api.ServiceTest;
-import kr.co.player.api.domain.club.model.ClubIntegratedDto;
+import kr.co.player.api.domain.integrated.model.ClubIntegratedDto;
 import kr.co.player.api.domain.club.service.ClubServiceImpl;
 import kr.co.player.api.domain.club.service.ClubUserServiceImpl;
 import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;

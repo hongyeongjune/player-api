@@ -1,11 +1,11 @@
 package kr.co.player.api.application.club;
 
-import kr.co.player.api.domain.club.model.ClubIntegratedDto;
+import kr.co.player.api.domain.integrated.model.ClubIntegratedDto;
 import kr.co.player.api.domain.club.model.ClubUserDto;
 import kr.co.player.api.domain.club.model.common.ClubUserRole;
 import kr.co.player.api.domain.club.service.ClubService;
 import kr.co.player.api.domain.club.service.ClubUserService;
-import kr.co.player.api.domain.integrated.JoinIntegratedService;
+import kr.co.player.api.domain.integrated.service.JoinIntegratedService;
 import kr.co.player.api.domain.invitation.model.ClubInvitationDto;
 import kr.co.player.api.domain.invitation.service.ClubInvitationService;
 import kr.co.player.api.domain.shared.JoinStatus;

@@ -1,9 +1,6 @@
 package kr.co.player.api.infrastructure.utils.builder;
 
-import kr.co.player.api.domain.club.model.ClubIntegratedDto;
-import kr.co.player.api.domain.shared.Address;
-import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;
-import org.jeasy.random.EasyRandom;
+import kr.co.player.api.domain.integrated.model.ClubIntegratedDto;
 
 public class ClubIntegratedBuilder {
     public static ClubIntegratedDto.CREATE create = ClubIntegratedDto.CREATE.builder()

@@ -1,7 +1,7 @@
 package kr.co.player.api.interfaces.controller;
 
 import kr.co.player.api.IntegrationTest;
-import kr.co.player.api.domain.club.model.ClubIntegratedDto;
+import kr.co.player.api.domain.integrated.model.ClubIntegratedDto;
 import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;
 import kr.co.player.api.infrastructure.persistence.entity.UserEntity;
 import kr.co.player.api.infrastructure.persistence.repository.UserRepository;

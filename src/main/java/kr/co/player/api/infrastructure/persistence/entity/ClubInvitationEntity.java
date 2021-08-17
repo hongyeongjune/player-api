@@ -1,6 +1,6 @@
 package kr.co.player.api.infrastructure.persistence.entity;
 
-import kr.co.player.api.domain.club.model.ClubIntegratedDto;
+import kr.co.player.api.domain.integrated.model.ClubIntegratedDto;
 import kr.co.player.api.domain.invitation.model.ClubInvitationDto;
 import kr.co.player.api.domain.shared.JoinStatus;
 import kr.co.player.api.infrastructure.persistence.BaseEntity;

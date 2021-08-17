@@ -1,12 +1,11 @@
 package kr.co.player.api.application.club;
 
 import kr.co.player.api.domain.club.model.ClubDto;
-import kr.co.player.api.domain.club.model.ClubIntegratedDto;
+import kr.co.player.api.domain.integrated.model.ClubIntegratedDto;
 import kr.co.player.api.domain.club.model.ClubUserDto;
 import kr.co.player.api.domain.club.service.ClubService;
 import kr.co.player.api.domain.club.service.ClubUserService;
-import kr.co.player.api.domain.integrated.ClubIntegratedService;
-import kr.co.player.api.domain.shared.Address;
+import kr.co.player.api.domain.integrated.service.ClubIntegratedService;
 import kr.co.player.api.infrastructure.error.exception.BadRequestException;
 import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;
 import kr.co.player.api.infrastructure.persistence.entity.ClubUserEntity;

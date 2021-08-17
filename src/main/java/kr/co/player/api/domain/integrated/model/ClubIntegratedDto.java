@@ -1,4 +1,4 @@
-package kr.co.player.api.domain.club.model;
+package kr.co.player.api.domain.integrated.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import kr.co.player.api.domain.shared.Address;

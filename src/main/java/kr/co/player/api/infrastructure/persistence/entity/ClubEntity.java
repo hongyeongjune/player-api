@@ -1,7 +1,7 @@
 package kr.co.player.api.infrastructure.persistence.entity;
 
 import kr.co.player.api.domain.club.model.ClubDto;
-import kr.co.player.api.domain.club.model.ClubIntegratedDto;
+import kr.co.player.api.domain.integrated.model.ClubIntegratedDto;
 import kr.co.player.api.domain.shared.Address;
 import kr.co.player.api.infrastructure.persistence.BaseEntity;
 import lombok.*;
