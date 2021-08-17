@@ -1,6 +1,7 @@
 package kr.co.player.api.infrastructure.utils.builder;
 
 import kr.co.player.api.domain.shared.JoinStatus;
+import kr.co.player.api.domain.submit.model.ClubSubmitDto;
 import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;
 import kr.co.player.api.infrastructure.persistence.entity.ClubSubmitEntity;
 import kr.co.player.api.infrastructure.persistence.entity.UserEntity;
@@ -31,6 +32,13 @@ public class ClubSubmitBuilder {
                 .joinStatus(JoinStatus.CANCEL)
                 .clubEntity(clubEntity)
                 .userEntity(userEntity)
+                .build();
+    }
+
+    public static ClubSubmitDto.CREATE create(ClubEntity clubEntity) {
+        return ClubSubmitDto.CREATE.builder()
+                .clubEntity(clubEntity)
+                .message(new EasyRandom().nextObject(String.class))
                 .build();
     }
 }
