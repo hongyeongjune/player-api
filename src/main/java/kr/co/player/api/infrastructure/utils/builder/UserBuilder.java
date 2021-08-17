@@ -8,6 +8,11 @@ import kr.co.player.api.infrastructure.persistence.entity.UserEntity;
 
 public class UserBuilder {
 
+    public static UserEntity target = UserEntity.builder()
+            .identity("targetUser")
+            .password("password")
+            .build();
+
     public static UserEntity build() {
         return UserEntity.builder()
                 .identity("hongyeongjune")
