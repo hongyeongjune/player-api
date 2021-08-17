@@ -45,7 +45,7 @@ public class ClubSubmitEntity extends BaseEntity {
                 .build();
     }
 
-    public ClubIntegratedDto.READ_SUBMIT toSubmitDomain() {
+    public ClubIntegratedDto.READ_SUBMIT toIntegratedDomain() {
         return ClubIntegratedDto.READ_SUBMIT.builder()
                 .identity(this.userEntity.getIdentity())
                 .name(this.userEntity.getName())
