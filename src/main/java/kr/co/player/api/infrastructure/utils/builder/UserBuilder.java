@@ -65,6 +65,26 @@ public class UserBuilder {
             .role(UserRole.USER)
             .build();
 
+    public static UserEntity SunJuHo = UserEntity.builder()
+            .identity("sunjuho")
+            .password("password")
+            .name("선주호")
+            .userPhone(new UserPhone("010-3316-7056"))
+            .birth("19950404")
+            .gender(Gender.MALE)
+            .role(UserRole.USER)
+            .build();
+
+    public static UserEntity MinJaeHong = UserEntity.builder()
+            .identity("minjaehong")
+            .password("password")
+            .name("민재홍")
+            .userPhone(new UserPhone("010-7770-5106"))
+            .birth("19950304")
+            .gender(Gender.MALE)
+            .role(UserRole.USER)
+            .build();
+
     public static UserDto.CREATE create = UserDto.CREATE.builder()
             .identity("hongyeongjune")
             .password("password")

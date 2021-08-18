@@ -1,5 +1,6 @@
 package kr.co.player.api.infrastructure.utils.builder;
 
+import com.amazonaws.services.guardduty.model.City;
 import kr.co.player.api.domain.shared.Address;
 import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;
 
@@ -22,7 +23,7 @@ public class ClubBuilder {
                     .city("경기도")
                     .district("구리시")
                     .build())
-            .description("경긷 구리시 아름마을 축구단")
+            .description("경기도 구리시 아름마을 축구단")
             .rating(0)
             .build();
 
@@ -35,4 +36,24 @@ public class ClubBuilder {
                 .description("북런던의 축구 팀")
                 .rating(0)
                 .build();
+
+    public static ClubEntity Liverpool = ClubEntity.builder()
+            .clubName("리버풀 FC")
+            .address(Address.builder()
+                    .city("리버풀")
+                    .district("머지사이드")
+                    .build())
+            .description("머지사이드 주의 축구 팀")
+            .rating(0)
+            .build();
+
+    public static ClubEntity ManchesterCity = ClubEntity.builder()
+            .clubName("맨체스터 시티 FC")
+            .address(Address.builder()
+                    .city("맨체스터")
+                    .district("맨체스터")
+                    .build())
+            .description("맨체스터의 축구 팀")
+            .rating(0)
+            .build();
 }
