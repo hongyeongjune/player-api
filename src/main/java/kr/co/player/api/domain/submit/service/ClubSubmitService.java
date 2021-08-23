@@ -18,6 +18,7 @@ public interface ClubSubmitService {
     Page<ClubSubmitEntity> getClubSubmitsByClubEntity(int pageNo, ClubEntity clubEntity);
     Long countClubSubmitByUserEntityNotWaiting();
     Optional<ClubSubmitEntity> getClubSubmitByWaiting(ClubEntity clubEntity);
+    Optional<ClubSubmitEntity> getClubSubmitByWaiting(ClubEntity clubEntity, UserEntity userEntity);
 
     //read - service
     Page<ClubSubmitDto.READ> getClubSubmits(int pageNo);

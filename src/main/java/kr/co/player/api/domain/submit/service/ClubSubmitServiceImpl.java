@@ -7,6 +7,7 @@ import kr.co.player.api.infrastructure.error.exception.NotFoundException;
 import kr.co.player.api.infrastructure.interceptor.UserThreadLocal;
 import kr.co.player.api.infrastructure.persistence.entity.ClubEntity;
 import kr.co.player.api.infrastructure.persistence.entity.ClubSubmitEntity;
+import kr.co.player.api.infrastructure.persistence.entity.UserEntity;
 import kr.co.player.api.infrastructure.persistence.repository.ClubSubmitRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -47,6 +48,11 @@ public class ClubSubmitServiceImpl implements ClubSubmitService {
     @Override
     public Optional<ClubSubmitEntity> getClubSubmitByWaiting(ClubEntity clubEntity) {
         return clubSubmitRepository.fetchClubSubmitByUserEntityAndClubEntityAndWaiting(UserThreadLocal.get(), clubEntity);
+    }
+
+    @Override
+    public Optional<ClubSubmitEntity> getClubSubmitByWaiting(ClubEntity clubEntity, UserEntity userEntity) {
+        return clubSubmitRepository.fetchClubSubmitByUserEntityAndClubEntityAndWaiting(userEntity, clubEntity);
     }
 
     /**
