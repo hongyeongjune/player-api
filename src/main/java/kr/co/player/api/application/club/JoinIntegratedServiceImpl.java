@@ -35,14 +35,16 @@ public class JoinIntegratedServiceImpl implements JoinIntegratedService {
     private final UserService userService;
 
     /**
-     * 클럽 가입 신청 : ClubService + ClubUserService + ClubSubmitService
+     * 클럽 가입 신청 : ClubService + ClubUserService + ClubSubmitService + ClubInvitationService
      * @param create : 클럽 가입을 위한 dto
      */
     @Override
     public void createClubSubmit(ClubIntegratedDto.CREATE_SUBMIT create) {
         ClubEntity clubEntity = clubService.getClub(create.getClubName());
 
-        if(clubUserService.getClubUserEntity(clubEntity, UserThreadLocal.get()).isPresent()) {
+        UserEntity userEntity = UserThreadLocal.get();
+
+        if(clubUserService.getClubUserEntity(clubEntity, userEntity).isPresent()) {
             throw new BadRequestException("이미 해당 클럽에 가입하셨습니다.");
         }
 
@@ -52,6 +54,12 @@ public class JoinIntegratedServiceImpl implements JoinIntegratedService {
 
         if(clubSubmitService.countClubSubmitByUserEntityNotWaiting() > SUBMIT_LIMIT) {
             throw new BadRequestException("신청 가능한 개수를 초과하였습니다.");
+        }
+
+        ClubUserEntity clubLeaderEntity = clubUserService.getClubLeader(clubEntity);
+
+        if(clubInvitationService.getClubInvitationByWaiting(clubLeaderEntity, userEntity).isPresent()) {
+            throw new BadRequestException("해당 클럽의 클럽 장이 회원님에게 이미 클럽으로 초대를 하였습니다.");
         }
 
         clubSubmitService.createSubmit(ClubSubmitDto.CREATE.builder()
@@ -83,6 +91,10 @@ public class JoinIntegratedServiceImpl implements JoinIntegratedService {
 
         if(!clubUserEntity.getClubUserRole().equals(ClubUserRole.LEADER)) {
             throw new BadRequestException("클럽의 리더가 아니기 때문에 초대 권한이 없습니다.");
+        }
+
+        if(clubSubmitService.getClubSubmitByWaiting(clubEntity, userEntity).isPresent()) {
+            throw new BadRequestException("해당 회원님이 본인의 클럽에 이미 가입 신청을 하였습니다.");
         }
 
         clubInvitationService.createClubInvitation(ClubInvitationDto.CREATE.builder()
