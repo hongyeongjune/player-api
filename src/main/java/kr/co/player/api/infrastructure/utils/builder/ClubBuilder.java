@@ -56,4 +56,14 @@ public class ClubBuilder {
             .description("맨체스터의 축구 팀")
             .rating(0)
             .build();
+
+    public static ClubEntity  Arsenal = ClubEntity.builder()
+            .clubName("아스날 FC")
+            .address(Address.builder()
+                    .city("런던")
+                    .district("이슬링턴 구")
+                    .build())
+            .description("북런던의 축구 팀")
+            .rating(0)
+            .build();
 }

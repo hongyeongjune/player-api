@@ -85,6 +85,76 @@ public class UserBuilder {
             .role(UserRole.USER)
             .build();
 
+    public static UserEntity SongHyeonSu = UserEntity.builder()
+            .identity("songhyeonsu")
+            .password("password")
+            .name("송현수")
+            .userPhone(new UserPhone("010-3692-6920"))
+            .birth("19950912")
+            .gender(Gender.MALE)
+            .role(UserRole.USER)
+            .build();
+
+    public static UserEntity JeongYuBin = UserEntity.builder()
+            .identity("jeongyubin")
+            .password("password")
+            .name("정유빈")
+            .userPhone(new UserPhone("010-2682-0348"))
+            .birth("19960106")
+            .gender(Gender.MALE)
+            .role(UserRole.USER)
+            .build();
+
+    public static UserEntity YuJaeHee = UserEntity.builder()
+            .identity("yujaehee")
+            .password("password")
+            .name("유재희")
+            .userPhone(new UserPhone("010-6367-7552"))
+            .birth("19950915")
+            .gender(Gender.MALE)
+            .role(UserRole.USER)
+            .build();
+
+    public static UserEntity LeeJaeBum = UserEntity.builder()
+            .identity("leejaebum")
+            .password("password")
+            .name("이재범")
+            .userPhone(new UserPhone("010-4220-4301"))
+            .birth("19971205")
+            .gender(Gender.MALE)
+            .role(UserRole.USER)
+            .build();
+
+    public static UserEntity NamYeJu = UserEntity.builder()
+            .identity("namyeju")
+            .password("password")
+            .name("남예주")
+            .userPhone(new UserPhone("010-4164-1838"))
+            .birth("20000112")
+            .gender(Gender.FEMALE)
+            .role(UserRole.USER)
+            .build();
+
+    public static UserEntity JeonAYeong = UserEntity.builder()
+            .identity("jeonayeong")
+            .password("password")
+            .name("전아영")
+            .userPhone(new UserPhone("010-4120-2721"))
+            .birth("19990519")
+            .gender(Gender.FEMALE)
+            .role(UserRole.USER)
+            .build();
+
+    public static UserEntity HwangSeoYoung = UserEntity.builder()
+            .identity("hwangseoyoung")
+            .password("password")
+            .name("황서영")
+            .userPhone(new UserPhone("010-2329-3553"))
+            .birth("")
+            .gender(Gender.FEMALE)
+            .role(UserRole.USER)
+            .build();
+
     public static UserDto.CREATE create = UserDto.CREATE.builder()
             .identity("hongyeongjune")
             .password("password")
