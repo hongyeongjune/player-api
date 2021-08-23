@@ -170,7 +170,7 @@ class JoinIntegratedControllerTest extends IntegrationTest {
         //given
         UserEntity savedUserEntity = UserBuilder.JeongYuBin;
         String accessToken = jwtProvider.createAccessToken(savedUserEntity.getIdentity(), savedUserEntity.getRole(), savedUserEntity.getName());
-        UserEntity userEntity = userRepository.save(UserBuilder.HwangSeoYoung);
+        UserEntity userEntity = userRepository.save(UserBuilder.NamYeJin);
 
         ClubIntegratedDto.CREATE_INVITATION createInvitation = ClubIntegratedBuilder.createInvitation(userEntity.getIdentity());
 
@@ -220,7 +220,7 @@ class JoinIntegratedControllerTest extends IntegrationTest {
         UserEntity savedUserEntity = UserBuilder.JeongYuBin;
         String accessToken = jwtProvider.createAccessToken(savedUserEntity.getIdentity(), savedUserEntity.getRole(), savedUserEntity.getName());
         ClubEntity savedClubEntity = ClubBuilder.Arsenal;
-        UserEntity userEntity = UserBuilder.HwangSeoYoung;
+        UserEntity userEntity = UserBuilder.NamYeJin;
 
         //when
         ResultActions resultActions = mockMvc.perform(get(URL + "/invitation")
@@ -367,7 +367,7 @@ class JoinIntegratedControllerTest extends IntegrationTest {
     void updateClubInvitationCancel() throws Exception {
         //given
         UserEntity savedLeaderEntity = UserBuilder.JeongYuBin;
-        UserEntity savedUserEntity = UserBuilder.HwangSeoYoung;
+        UserEntity savedUserEntity = UserBuilder.NamYeJin;
         String accessToken = jwtProvider.createAccessToken(savedUserEntity.getIdentity(), savedUserEntity.getRole(), savedUserEntity.getName());
         ClubEntity savedClubEntity = ClubBuilder.Arsenal;
 
