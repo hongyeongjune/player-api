@@ -145,12 +145,12 @@ public class UserBuilder {
             .role(UserRole.USER)
             .build();
 
-    public static UserEntity HwangSeoYoung = UserEntity.builder()
-            .identity("hwangseoyoung")
+    public static UserEntity NamYeJin = UserEntity.builder()
+            .identity("namyejin")
             .password("password")
-            .name("황서영")
-            .userPhone(new UserPhone("010-2329-3553"))
-            .birth("")
+            .name("남예진")
+            .userPhone(new UserPhone("010-4163-1838"))
+            .birth("19970426")
             .gender(Gender.FEMALE)
             .role(UserRole.USER)
             .build();
