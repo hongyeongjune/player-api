@@ -102,6 +102,22 @@ class ClubSubmitServiceImplTest {
     }
 
     @Test
+    void getClubSubmitByWaitingOverriding() {
+        //given
+        UserEntity userEntity = new EasyRandom().nextObject(UserEntity.class);
+        ClubEntity clubEntity = new EasyRandom().nextObject(ClubEntity.class);
+        ClubSubmitEntity clubSubmitEntity = ClubSubmitBuilder.build(clubEntity, userEntity);
+        given(clubSubmitRepository.fetchClubSubmitByUserEntityAndClubEntityAndWaiting(userEntity, clubEntity)).willReturn(Optional.ofNullable(clubSubmitEntity));
+
+        //when
+        ClubSubmitEntity savedClubSubmitEntity = clubSubmitService.getClubSubmitByWaiting(clubEntity, userEntity).orElse(null);
+
+        //then
+        assertNotNull(savedClubSubmitEntity);
+        assertEquals(savedClubSubmitEntity.getUserEntity().getIdentity(), clubSubmitEntity.getUserEntity().getIdentity());
+    }
+
+    @Test
     void getClubSubmits() {
         //given
         try (MockedStatic<UserThreadLocal> utl = Mockito.mockStatic(UserThreadLocal.class)) {
