@@ -25,9 +25,6 @@ public class GoalEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MatchType matchType;
 
-    @Column(name = "assist_user_id")
-    private Long assistUserId;
-
     @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
@@ -35,4 +32,8 @@ public class GoalEntity extends BaseEntity {
     @ManyToOne(targetEntity = MatchEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "match_id")
     private MatchEntity matchEntity;
+
+    @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "assist_user_id")
+    private UserEntity assistUserEntity;
 }
