@@ -1,18 +1,18 @@
 package kr.co.player.api.infrastructure.persistence.entity;
 
 import kr.co.player.api.domain.match.model.common.MatchLevel;
+import kr.co.player.api.domain.match.model.common.MatchStatus;
 import kr.co.player.api.domain.shared.Address;
 import kr.co.player.api.infrastructure.persistence.BaseEntity;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.JoinColumnOrFormula;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -30,6 +30,15 @@ public class MatchEntity extends BaseEntity {
     @Embedded
     private Address address;
 
+    @Column(name = "field_name")
+    private String fieldName;
+
+    @Column(name = "start_time")
+    private LocalDateTime startTime;
+
+    @Column(name = "end_time")
+    private LocalDateTime endTime;
+
     @ManyToOne(targetEntity = ClubEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "home_club_id")
     private ClubEntity homeClubEntity;
@@ -43,6 +52,9 @@ public class MatchEntity extends BaseEntity {
 
     @Column(name = "away_score")
     private int awayScore;
+
+    @Enumerated(EnumType.STRING)
+    private MatchStatus matchStatus;
 
     @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "home_leader_id")
