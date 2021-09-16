@@ -25,6 +25,18 @@ public class UserBuilder {
                 .build();
     }
 
+    public static UserEntity testData = UserEntity.builder()
+            .identity("asdasdsd")
+            .password("password")
+            .name("홍영준")
+
+            .userPhone(new UserPhone("010-6479-4834"))
+            .birth("19951217")
+
+            .gender(Gender.MALE)
+            .role(UserRole.USER)
+            .build();
+
     public static UserEntity HongYeongJune = UserEntity.builder()
             .identity("leaderHong")
             .password("password")
