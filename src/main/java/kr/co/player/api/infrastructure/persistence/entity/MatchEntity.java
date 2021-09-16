@@ -1,8 +1,10 @@
 package kr.co.player.api.infrastructure.persistence.entity;
 
+import kr.co.player.api.domain.match.model.MatchDto;
 import kr.co.player.api.domain.match.model.common.MatchLevel;
 import kr.co.player.api.domain.match.model.common.MatchStatus;
 import kr.co.player.api.domain.shared.Address;
+import kr.co.player.api.domain.submit.model.ClubSubmitDto;
 import kr.co.player.api.infrastructure.persistence.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.JoinColumnOrFormula;
@@ -58,9 +60,23 @@ public class MatchEntity extends BaseEntity {
 
     @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "home_leader_id")
-    private UserEntity homeUserEntity;
+    private UserEntity homeLeaderUserEntity;
 
     @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "away_leader_id")
-    private UserEntity awayUserEntity;
+    private UserEntity awayLeaderUserEntity;
+
+    public MatchDto.READ toDomain() {
+        return MatchDto.READ.builder()
+                .id(this.id)
+                .name(this.name)
+                .clubName(this.homeClubEntity.getClubName())
+                .city(this.address.getCity())
+                .district(this.address.getDistrict())
+                .startTime(this.startTime)
+                .endTime(this.endTime)
+                .fieldName(this.fieldName)
+                .playerCount(this.playerCount)
+                .build();
+    }
 }
