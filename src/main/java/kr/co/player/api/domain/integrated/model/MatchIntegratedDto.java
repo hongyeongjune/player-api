@@ -1,10 +1,15 @@
 package kr.co.player.api.domain.integrated.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import kr.co.player.api.domain.match.model.common.MatchType;
+import kr.co.player.api.domain.match.model.common.MatchUserRole;
+import kr.co.player.api.domain.shared.Address;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class MatchIntegratedDto {
 
@@ -58,5 +63,56 @@ public class MatchIntegratedDto {
         @ApiModelProperty(example = "끝나는 시간(분)")
         @NotBlank(message = "분을 입력해주세요")
         private int endMinutes;
+
+        @ApiModelProperty(example = "축구장 이름")
+        @NotBlank(message = "구리시청 축구장")
+        private String fieldName;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class READ {
+        @ApiModelProperty(example = "매치 제목")
+        private String name;
+
+        @ApiModelProperty(example = "클럽 이름")
+        private String clubName;
+
+        @ApiModelProperty(example = "경기도 구리시")
+        private Address address;
+
+        @ApiModelProperty(example = "시작 시간")
+        private LocalDateTime startTime;
+
+        @ApiModelProperty(example = "종료 시간")
+        private LocalDateTime endTime;
+
+        @ApiModelProperty(example = "축구장 이름")
+        private String fieldName;
+
+        @ApiModelProperty(example = "명단")
+        private List<MATCH_USER> matchUserList;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class MATCH_USER {
+        @ApiModelProperty(example = "회원 아이디")
+        private String identity;
+
+        @ApiModelProperty(example = "회원 이름")
+        private String name;
+
+        @ApiModelProperty(example = "홈 or 어웨이")
+        private MatchType matchType;
+
+        @ApiModelProperty(example = "클럽원 or 용병")
+        private MatchUserRole matchUserRole;
     }
 }

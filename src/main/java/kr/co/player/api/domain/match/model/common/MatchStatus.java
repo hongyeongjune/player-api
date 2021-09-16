@@ -9,7 +9,7 @@ import java.util.Arrays;
 @Getter
 @AllArgsConstructor
 public enum MatchStatus {
-    RECRUITMENT("모집중"), PROCEEDING("진행중"), FINISH("종료");
+    RECRUITMENT("모집중"), RECRUITMENT_FINISH("모집완료"), PROCEEDING("진행중"), FINISH("종료");
 
     private String matchStatus;
 
